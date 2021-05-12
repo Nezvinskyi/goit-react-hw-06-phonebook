@@ -4,7 +4,7 @@ import { FormControl, InputLabel, OutlinedInput, Button } from '@material-ui/cor
 import { connect } from 'react-redux';
 import actions from '../../redux/contacts/contacts-actions';
 import './ContactForm.scss'
-
+import store from '../../redux/store';
 
 class ContactForm extends Component {
 	state = {
@@ -18,8 +18,13 @@ class ContactForm extends Component {
 	};
 	
 	handleSubmit = event => {
-		const { name, number} = this.state
+		const { name, number } = this.state
+		const contacts = store.store.getState().contacts.items
 		event.preventDefault();
+		if (contacts.some(contact=>contact.name === name)) {
+			alert(`${name} is already in contacts.`);
+      return;
+		}
 		this.props.onSubmit(name, number);
 		this.reset();
 	};
