@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import { FormControl, InputLabel, OutlinedInput, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contacts-actions';
+import actions from '../../redux/contacts/contacts-actions';
 import './ContactForm.scss'
+
 
 class ContactForm extends Component {
 	state = {
@@ -75,9 +76,9 @@ class ContactForm extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onSubmit: (name, number) => dispatch(contactsActions.addContact(name, number))
+		onSubmit: (name, number) => dispatch(actions.addContact(name, number))
 	}
-}
+};
  
 export default connect(null, mapDispatchToProps)(ContactForm);
 
