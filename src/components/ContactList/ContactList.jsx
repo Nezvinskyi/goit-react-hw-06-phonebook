@@ -22,13 +22,13 @@ const ContactList = ({ contacts, onDeleteContact }) => (
 	</ul>
 )
 
-const getFilteredContacts = (contacts, filter)=>{
+const getFilteredSortedContacts = (contacts, filter) => {
 	const normalizedFilter = filter.toLowerCase();
-	return contacts.filter(({name})=>name.toLowerCase().includes(normalizedFilter))
+	return contacts.filter(({ name }) => name.toLowerCase().includes(normalizedFilter)).sort((a, b) => a.name.localeCompare(b.name))
 }
 
 const mapStateToProps = ({contacts: {items, filter}}) => ({
-	contacts: getFilteredContacts(items, filter)
+	contacts: getFilteredSortedContacts(items, filter)
 })
 
 const mapDispatchToProps = dispatch => ({

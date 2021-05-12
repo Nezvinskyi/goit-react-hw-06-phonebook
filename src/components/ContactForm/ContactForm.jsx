@@ -1,10 +1,11 @@
 /* eslint-disable no-useless-escape */
 import React, { Component } from 'react';
-import { FormControl, InputLabel, OutlinedInput, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import actions from '../../redux/contacts/contacts-actions';
-import './ContactForm.scss'
 import store from '../../redux/store';
+import { FormControl, InputLabel, OutlinedInput, Button } from '@material-ui/core';
+import './ContactForm.scss'
+
 
 class ContactForm extends Component {
 	state = {
@@ -20,11 +21,14 @@ class ContactForm extends Component {
 	handleSubmit = event => {
 		const { name, number } = this.state
 		const contacts = store.store.getState().contacts.items
+
 		event.preventDefault();
+		
 		if (contacts.some(contact=>contact.name === name)) {
 			alert(`${name} is already in contacts.`);
       return;
 		}
+
 		this.props.onSubmit(name, number);
 		this.reset();
 	};
@@ -37,12 +41,11 @@ class ContactForm extends Component {
 
 		return (
 			<form onSubmit={this.handleSubmit} className='Form'>
-				<FormControl variant="outlined" className='Form-input'>
-        	<InputLabel color='secondary' htmlFor="component-outlined-name">Name</InputLabel>
+				<FormControl variant="outlined" className='Form-input' styles='margin-bottom: 10px'>
+        	<InputLabel color='secondary'>Name</InputLabel>
 					<OutlinedInput
-						
 						type="text"
-						id="component-outlined-name"
+				
 						name='name'
 						color='secondary'
 						value={this.state.name}
@@ -52,10 +55,7 @@ class ContactForm extends Component {
 						label="Name"
 					/>
 				</FormControl>
-	
-				<br/>
-				<br/>
-
+				<br />
 				<FormControl variant="outlined" className='Form-input'>
 					<InputLabel color='secondary' htmlFor="component-outlined-number">Number</InputLabel>
 					<OutlinedInput
@@ -69,8 +69,7 @@ class ContactForm extends Component {
 						required
 						label="Number" />
 				</FormControl>
-				<br/>
-				<br/>
+				<br />
 				<Button type="submit" variant="outlined" color="secondary">
 					Add contact
 				</Button>

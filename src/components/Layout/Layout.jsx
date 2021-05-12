@@ -3,8 +3,10 @@ import Container from '../Container'
 
 const Layout = ({ children }) => (
 	<>
-		<AppBar />
-		<Container>{ children}</Container>
+		<Container>
+			<AppBar />
+			{children}
+		</Container>
 	</>
-)
+);
 export default Layout
